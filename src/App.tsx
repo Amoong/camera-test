@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useRef } from "react";
+import Webcam from "react-webcam";
+
+const videoConsList = [
+  {
+    width: 360,
+    height: 720,
+    facingMode: "environment",
+  },
+  {
+    width: 1280,
+    height: 720,
+    facingMode: "environment",
+  },
+];
 
 function App() {
+  const webcamRef = useRef(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {videoConsList.map((cons) => (
+        <Webcam
+          audio={false}
+          height={360}
+          ref={webcamRef}
+          screenshotFormat="image/jpeg"
+          width={640}
+          videoConstraints={cons}
+        />
+      ))}
+    </>
   );
 }
 
