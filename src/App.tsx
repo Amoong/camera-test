@@ -95,7 +95,7 @@ function App() {
           <br />
         </div>
       ))}
-      {<span>message: {message}</span>}
+      <span>message: {message}</span>
     </div>
   );
 }
