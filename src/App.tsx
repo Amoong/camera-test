@@ -55,13 +55,13 @@ function App() {
         label: element.label,
       };
     });
-
+    alert(JSON.stringify(deviceInfos));
     setCamDeviceInfos(deviceInfos);
   };
 
   useEffect(() => {
     getDeviceList();
-  });
+  }, []);
 
   return (
     <div className="app">
