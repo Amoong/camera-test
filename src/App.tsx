@@ -46,8 +46,6 @@ function App() {
 
     let stream = await navigator.mediaDevices.getUserMedia(constraints);
 
-    let stream_settings = stream.getVideoTracks()[0].getSettings();
-
     const deviceInfos = stream.getVideoTracks().map((element) => {
       const settings = element.getSettings();
 
