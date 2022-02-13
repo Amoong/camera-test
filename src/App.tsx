@@ -15,7 +15,7 @@ function App() {
     setMessage("1");
     let constraints = {
       audio: false,
-      video: { height: 1440, width: 1080, facingMode: "environment" },
+      video: { height: 1080, width: 1080, facingMode: "environment" },
     };
     setMessage("2");
 
