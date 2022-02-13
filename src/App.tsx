@@ -47,10 +47,15 @@ function App() {
     };
     setMessage("2");
 
-    let stream = await navigator.mediaDevices.getUserMedia(constraints);
-    setMessage("3");
+    let stream;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia(constraints);
+    } catch (error) {
+      setMessage(JSON.stringify(error));
+      return;
+    }
 
-    const deviceInfos = stream.getVideoTracks().map((element) => {
+    const deviceInfos = stream?.getVideoTracks().map((element) => {
       const settings = element.getSettings();
 
       return {
