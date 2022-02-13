@@ -51,7 +51,7 @@ function App() {
     try {
       stream = await navigator.mediaDevices.getUserMedia(constraints);
     } catch (error) {
-      setMessage(JSON.stringify(error));
+      alert(error);
       return;
     }
 
@@ -78,7 +78,9 @@ function App() {
   return (
     <div className="app">
       {videoConsList.map((_, idx) => (
-        <button onClick={() => setCurCons(idx)}>{idx}</button>
+        <button key={idx} onClick={() => setCurCons(idx)}>
+          {idx}
+        </button>
       ))}
       <Webcam
         audio={false}
