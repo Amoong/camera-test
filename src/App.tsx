@@ -9,8 +9,8 @@ const videoConsList = [
     facingMode: "environment",
   },
   {
-    width: 360,
-    height: 720,
+    width: 1440,
+    height: 2560,
     facingMode: "environment",
   },
   {
