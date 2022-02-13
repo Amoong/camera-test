@@ -6,9 +6,8 @@ function App() {
   const webcamRef = useRef(null);
   const [camDeivceInfos, setCamDeviceInfos] = useState<
     Array<{
-      width: number | undefined;
-      height: number | undefined;
       label: string;
+      kind: string;
     }>
   >([]);
   const getDeviceList = async () => {
@@ -18,6 +17,19 @@ function App() {
       video: { height: 1080, width: 1080, facingMode: "environment" },
     };
     setMessage("2");
+
+    try {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const deviceInfos = devices.map((element) => {
+        return {
+          label: element.label,
+          kind: element.kind,
+        };
+      });
+      setCamDeviceInfos(deviceInfos);
+    } catch (error) {
+      console.error(error);
+    }
 
     let stream;
     try {
@@ -31,20 +43,6 @@ function App() {
       alert(error);
       return;
     }
-
-    const deviceInfos = stream?.getVideoTracks().map((element) => {
-      const settings = element.getSettings();
-
-      return {
-        width: settings.width,
-        height: settings.height,
-        label: element.label,
-      };
-    });
-    setMessage("4");
-
-    setCamDeviceInfos(deviceInfos);
-    setMessage("5");
   };
 
   useEffect(() => {
@@ -54,12 +52,10 @@ function App() {
   return (
     <div className="app">
       {camDeivceInfos.map((info) => (
-        <div className="info-wrapper" key={info.label}>
+        <div className="info-wrapper" key={info.label + info.kind}>
           <span>label: {info.label}</span>
           <br />
-          <span>width: {info.width}</span>
-          <br />
-          <span>height: {info.height}</span>
+          <span>kind: {info.kind}</span>
           <br />
           <br />
         </div>
