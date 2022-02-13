@@ -64,7 +64,7 @@ function App() {
           <br />
         </div>
       ))}
-      <video autoPlay width="720" height="1440" ref={webcamRef} src=""></video>
+      <video autoPlay width="1440" height="2560" ref={webcamRef} src=""></video>
       <span>message: {message}</span>
     </div>
   );

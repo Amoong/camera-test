@@ -3,3 +3,7 @@
   flex-direction: column;
   align-items: center;
 }
+
+video {
+  transform: scale(0.5);
+}
