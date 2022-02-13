@@ -1,15 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import "./App.css";
 
-const videoConstraints = {
-  width: 2560,
-  height: 1440,
-  facingMode: "environment",
-};
-
 function App() {
   const [message, setMessage] = useState("");
-  const [camSrc, setCamSrc] = useState(null);
   const webcamRef = useRef(null);
   const [camDeivceInfos, setCamDeviceInfos] = useState<
     Array<{
