@@ -3,6 +3,11 @@ import Webcam from "react-webcam";
 
 const videoConsList = [
   {
+    width: 2560,
+    height: 1440,
+    facingMode: "environment",
+  },
+  {
     width: 360,
     height: 720,
     facingMode: "environment",
@@ -10,11 +15,6 @@ const videoConsList = [
   {
     width: 1280,
     height: 720,
-    facingMode: "environment",
-  },
-  {
-    width: 2560,
-    height: 1440,
     facingMode: "environment",
   },
 ];
