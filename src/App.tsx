@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import "./App.css";
 
@@ -22,11 +22,48 @@ const videoConsList = [
 
 function App() {
   const [curCons, setCurCons] = useState<number>(0);
+  const [camDeivceInfos, setCamDeviceInfos] = useState<
+    Array<{
+      width: number | undefined;
+      height: number | undefined;
+      label: string;
+    }>
+  >([]);
   const webcamRef = useRef(null);
 
   const onUserMedia = (res: MediaStream) => {
-    console.log(res);
+    // console.log(res);
   };
+
+  const getDeviceList = async () => {
+    let constraints = {
+      audio: true,
+      video: {
+        width: { ideal: 1920 },
+        height: { ideal: 1080 },
+      },
+    };
+
+    let stream = await navigator.mediaDevices.getUserMedia(constraints);
+
+    let stream_settings = stream.getVideoTracks()[0].getSettings();
+
+    const deviceInfos = stream.getVideoTracks().map((element) => {
+      const settings = element.getSettings();
+
+      return {
+        width: settings.width,
+        height: settings.height,
+        label: element.label,
+      };
+    });
+
+    setCamDeviceInfos(deviceInfos);
+  };
+
+  useEffect(() => {
+    getDeviceList();
+  });
 
   return (
     <div className="app">
@@ -42,6 +79,17 @@ function App() {
         videoConstraints={videoConsList[curCons]}
         onUserMedia={onUserMedia}
       />
+      {camDeivceInfos.map((info) => (
+        <div className="info-wrapper" key={info.label}>
+          <span>label: {info.label}</span>
+          <br />
+          <span>width: {info.width}</span>
+          <br />
+          <span>height: {info.height}</span>
+          <br />
+          <br />
+        </div>
+      ))}
     </div>
   );
 }
