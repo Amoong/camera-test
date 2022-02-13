@@ -23,6 +23,7 @@ function App() {
 
     try {
       const devices = await navigator.mediaDevices.enumerateDevices();
+      console.log(devices);
       const deviceInfos = devices
         .filter((elem) => elem.kind === "videoinput")
         .map((element) => {
@@ -36,6 +37,7 @@ function App() {
 
       const cons = deviceInfos.map((elem) => ({
         deviceId: elem.id,
+        facingMode: "environment",
       }));
       setConstraints(cons);
     } catch (error) {
