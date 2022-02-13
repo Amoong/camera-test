@@ -13,11 +13,8 @@ function App() {
   const getDeviceList = async () => {
     setMessage("1");
     let constraints = {
-      audio: true,
-      video: {
-        width: { ideal: 1920 },
-        height: { ideal: 1080 },
-      },
+      audio: false,
+      video: { height: 2560, width: 1440, facingMode: "environment" },
     };
     setMessage("2");
 
