@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import Webcam from "react-webcam";
 import "./App.css";
 
 const videoConstraints = {
@@ -10,6 +9,7 @@ const videoConstraints = {
 
 function App() {
   const [message, setMessage] = useState("");
+  const [camSrc, setCamSrc] = useState(null);
   const webcamRef = useRef(null);
   const [camDeivceInfos, setCamDeviceInfos] = useState<
     Array<{
@@ -29,6 +29,11 @@ function App() {
     let stream;
     try {
       stream = await navigator.mediaDevices.getUserMedia(constraints);
+      const video = document.querySelector("video");
+      console.log(video);
+      if (video) {
+        video.srcObject = stream;
+      }
     } catch (error) {
       alert(error);
       return;
@@ -45,7 +50,6 @@ function App() {
     });
     setMessage("4");
 
-    alert(JSON.stringify(deviceInfos));
     setCamDeviceInfos(deviceInfos);
     setMessage("5");
   };
@@ -67,14 +71,7 @@ function App() {
           <br />
         </div>
       ))}
-      <Webcam
-        audio={false}
-        height={2560}
-        ref={webcamRef}
-        screenshotFormat="image/jpeg"
-        width={1440}
-        videoConstraints={videoConstraints}
-      />
+      <video autoPlay width="720" height="1440" ref={webcamRef} src=""></video>
       <span>message: {message}</span>
     </div>
   );
