@@ -12,13 +12,18 @@ const videoConsList = [
     height: 720,
     facingMode: "environment",
   },
+  {
+    width: 2560,
+    height: 1440,
+    facingMode: "environment",
+  },
 ];
 
 function App() {
   const webcamRef = useRef(null);
 
   return (
-    <>
+    <div className="app">
       {videoConsList.map((cons) => (
         <Webcam
           audio={false}
@@ -29,7 +34,7 @@ function App() {
           videoConstraints={cons}
         />
       ))}
-    </>
+    </div>
   );
 }
 
