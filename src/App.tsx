@@ -69,10 +69,10 @@ function App() {
       ))}
       <Webcam
         audio={false}
-        height={720}
+        height={2560}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
-        width={1280}
+        width={1440}
         videoConstraints={videoConstraints}
       />
       <span>message: {message}</span>
