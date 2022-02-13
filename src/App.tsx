@@ -24,6 +24,10 @@ function App() {
   const [curCons, setCurCons] = useState<number>(0);
   const webcamRef = useRef(null);
 
+  const onUserMedia = (res: MediaStream) => {
+    console.log(res);
+  };
+
   return (
     <div className="app">
       {videoConsList.map((_, idx) => (
@@ -31,12 +35,12 @@ function App() {
       ))}
       <Webcam
         audio={false}
-        height={360}
+        height={720}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
-        width={640}
+        width={1280}
         videoConstraints={videoConsList[curCons]}
-        onUserMedia={(res) => console.log(res)}
+        onUserMedia={onUserMedia}
       />
     </div>
   );
