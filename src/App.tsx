@@ -1,8 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import Webcam from "react-webcam";
 import "./App.css";
+
+const videoConstraints = {
+  width: 2560,
+  height: 1440,
+  facingMode: "environment",
+};
 
 function App() {
   const [message, setMessage] = useState("");
+  const webcamRef = useRef(null);
   const [camDeivceInfos, setCamDeviceInfos] = useState<
     Array<{
       width: number | undefined;
@@ -59,6 +67,14 @@ function App() {
           <br />
         </div>
       ))}
+      <Webcam
+        audio={false}
+        height={720}
+        ref={webcamRef}
+        screenshotFormat="image/jpeg"
+        width={1280}
+        videoConstraints={videoConstraints}
+      />
       <span>message: {message}</span>
     </div>
   );
