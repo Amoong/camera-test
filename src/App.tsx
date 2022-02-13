@@ -1,27 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import Webcam from "react-webcam";
+import { useEffect, useState } from "react";
 import "./App.css";
 
-const videoConsList = [
-  {
-    width: 2560,
-    height: 1440,
-    facingMode: "environment",
-  },
-  {
-    width: 1440,
-    height: 2560,
-    facingMode: "environment",
-  },
-  {
-    width: 1280,
-    height: 720,
-    facingMode: "environment",
-  },
-];
-
 function App() {
-  const [curCons, setCurCons] = useState<number>(0);
   const [message, setMessage] = useState("");
   const [camDeivceInfos, setCamDeviceInfos] = useState<
     Array<{
@@ -30,12 +10,6 @@ function App() {
       label: string;
     }>
   >([]);
-  const webcamRef = useRef(null);
-
-  const onUserMedia = (res: MediaStream) => {
-    // console.log(res);
-  };
-
   const getDeviceList = async () => {
     setMessage("1");
     let constraints = {
@@ -77,20 +51,6 @@ function App() {
 
   return (
     <div className="app">
-      {videoConsList.map((_, idx) => (
-        <button key={idx} onClick={() => setCurCons(idx)}>
-          {idx}
-        </button>
-      ))}
-      <Webcam
-        audio={false}
-        height={720}
-        ref={webcamRef}
-        screenshotFormat="image/jpeg"
-        width={1280}
-        videoConstraints={videoConsList[curCons]}
-        onUserMedia={onUserMedia}
-      />
       {camDeivceInfos.map((info) => (
         <div className="info-wrapper" key={info.label}>
           <span>label: {info.label}</span>
