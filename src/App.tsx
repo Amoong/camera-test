@@ -22,6 +22,7 @@ const videoConsList = [
 
 function App() {
   const [curCons, setCurCons] = useState<number>(0);
+  const [message, setMessage] = useState("");
   const [camDeivceInfos, setCamDeviceInfos] = useState<
     Array<{
       width: number | undefined;
@@ -36,6 +37,7 @@ function App() {
   };
 
   const getDeviceList = async () => {
+    setMessage("1");
     let constraints = {
       audio: true,
       video: {
@@ -43,8 +45,10 @@ function App() {
         height: { ideal: 1080 },
       },
     };
+    setMessage("2");
 
     let stream = await navigator.mediaDevices.getUserMedia(constraints);
+    setMessage("3");
 
     const deviceInfos = stream.getVideoTracks().map((element) => {
       const settings = element.getSettings();
@@ -55,8 +59,11 @@ function App() {
         label: element.label,
       };
     });
+    setMessage("4");
+
     alert(JSON.stringify(deviceInfos));
     setCamDeviceInfos(deviceInfos);
+    setMessage("5");
   };
 
   useEffect(() => {
@@ -88,6 +95,7 @@ function App() {
           <br />
         </div>
       ))}
+      {<span>message: {message}</span>}
     </div>
   );
 }
